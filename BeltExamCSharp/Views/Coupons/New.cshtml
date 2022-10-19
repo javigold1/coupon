@@ -1,0 +1,21 @@
+@model Coupon
+
+<form asp-controller="Coupons" asp-action="Create" method="POST">
+    <div class="mb-3">
+        <label asp-for="CouponCode"></label>
+        <span asp-validation-for="CouponCode" class="text-danger font-weight-bold"></span>
+        <input asp-for="CouponCode" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="CouponWebsite"></label>
+        <span asp-validation-for="CouponWebsite" class="text-danger font-weight-bold"></span>
+        <input asp-for="CouponWebsite" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description"></label>
+        <span asp-validation-for="Description" class="text-danger font-weight-bold"></span>
+        <input asp-for="Description" class="form-control" />
+    </div>
+
+    <button class="btn btn-outline-primary">Add Coupon</button>
+</form>

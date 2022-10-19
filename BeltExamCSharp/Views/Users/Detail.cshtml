@@ -1,0 +1,14 @@
+@model User
+
+
+<div class="container mx-75">
+    <div class="text-center">
+        <h1>Account Information</h1>
+        <h2>UserName: @Model.UserName</h2>
+        <h2>Email: @Model.Email</h2>
+    </div>
+    <div class="text-center">
+        <h3>Coupons posted: @Model.UserCoupons.Count()</h3>
+        <h3># of coupons you used: @Model.UserUsedCoupons.Count()</h3>
+    </div>
+</div>

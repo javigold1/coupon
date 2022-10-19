@@ -1,0 +1,60 @@
+@model List<Coupon>
+
+<div class="row ml-5">
+    @foreach (Coupon coupon in Model)
+    {
+        <div class="card border-primary m-3" style="max-width: 18rem;">
+            <div class="card-header">
+                @coupon.CouponCode
+            </div>
+            <div class="card-body ">
+                <h5 class="card-title">Use on: @coupon.CouponWebsite</h5>
+
+                <p class="card-text">@coupon.Description</p>
+
+                <div class="card-footer bg-transparent border-primary">
+                    <p>@coupon.CouponUsers.Count() users have used this code.</p>
+
+                    @{
+                        bool alreadyused = coupon.CouponUsers.Any(u => u.UserId == Context.Session.GetInt32("UUID"));
+                    }
+
+                    @if (coupon.UserId == Context.Session.GetInt32("UUID"))
+                    {
+                        <p><i>You posted this</i></p>
+                    }
+                    else
+                    {
+                        @if (alreadyused)
+                        {
+                            <p><i>You used this</i></p>
+                        }
+                        else
+                        {
+                            <p><a href="../coupons/@coupon.CouponId/use">I used this</a></p>
+                        }
+                    }
+
+                    <p>@coupon.CouponsExpired.Count() users have expired this code.</p>
+                    @{
+                        bool alreadyexpired = coupon.CouponsExpired.Any(u => u.UserId == Context.Session.GetInt32("UUID"));
+                    }
+                    @if (alreadyexpired)
+                    {
+                        <p><i>You expired this coupon</i></p>
+                    }
+                    else
+                    {
+                        <p><a href="../coupons/@coupon.CouponId/expire">Expire this coupon</a></p>
+                    }
+
+                    <p>
+                        Posted by: @coupon.Clipper.UserName
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
